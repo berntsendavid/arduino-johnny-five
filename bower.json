@@ -1,0 +1,22 @@
+{
+  "name": "arduino-johnny-5",
+  "description": "",
+  "main": "index.js",
+  "authors": [
+    "David <berntsen.david@gmail.com>"
+  ],
+  "license": "ISC",
+  "homepage": "https://github.com/berntsendavid/arduino-johnny-five",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "angular-socket-io": "^0.7.0",
+    "socket.io-client": "^1.5.0",
+    "angular": "angularjs#^1.5.8"
+  }
+}
