@@ -1,0 +1,17 @@
+{
+  "name": "arduino-johnny-5",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.14.0",
+    "johnny-five": "^0.10.3",
+    "socket.io": "^1.5.0"
+  }
+}
