@@ -12,8 +12,13 @@
 
     <h1>{{"Led controller"}}</h1>
 		<div ng-controller="ArduController">
-			<button ng-click="ledOn()">On</button>
-			<button ng-click="ledOff()">Off</button>
+			<button ng-click="launch()">Launch</button>
+			<button ng-click="reset()">Reset</button>
+			<!-- <button ng-click="ledOn()">On</button> -->
+			<!-- <button ng-click="ledOff()">Off</button> -->
+			<!-- <hr> -->
+			<button ng-click="open()">Open</button>
+			<button ng-click="close()">Close</button>
 		</div>
 
 		<script type="text/javascript">
@@ -23,18 +28,22 @@
 			}).
 			controller('ArduController', function ($scope,mySocket) {
 
-        $scope.ledOn = function () {
-
-          mySocket.emit('led:on');
-          console.log('LED ON');
+        $scope.launch = function () {
+          mySocket.emit('launch');
         };
 
-
-        $scope.ledOff = function () {
-
-          mySocket.emit('led:off');
-          console.log('LED OFF');
+        $scope.reset = function () {
+          mySocket.emit('reset');
         };
+
+        $scope.open = function () {
+          mySocket.emit('open');
+        };
+
+        $scope.close = function () {
+          mySocket.emit('close');
+        };
+
 			});
 
 		</script>

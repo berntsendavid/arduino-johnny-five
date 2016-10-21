@@ -15,29 +15,56 @@ app.get('/', function(req, res) {
 
 httpServer.listen(port);
 console.log('Server available at http://localhost:' + port);
-var led;
-
+var leds = [];
+var counter = 0;
+var servo;
+var servo_pos = 0;
 //Arduino board connection
+
+function countdown() {
+		led = leds[counter];
+		led.on();
+		counter++;
+		if (counter < leds.length){
+				setTimeout(countdown, 1000);
+		}else {
+				servo.to(5);
+				counter = 0;
+		}
+}
 
 var board = new five.Board();
 board.on("ready", function() {
     console.log('Arduino connected');
-    led = new five.Led(2);
+		for (i=2;i<5;++i){
+				leds.push(new five.Led(i));
+		}
+		servo = new five.Servo({
+				pin: 8
+		});
 });
 
 //Socket connection handler
 io.on('connection', function (socket) {
     console.log(socket.id);
 
-    socket.on('led:on', function (data) {
-        led.on();
-        console.log('LED ON RECEIVED');
+    socket.on('launch', (data) => {
+				countdown();
     });
 
-    socket.on('led:off', function (data) {
-        led.off();
-        console.log('LED OFF RECEIVED');
+    socket.on('reset', (data) => {
+				leds.map((led) => led.off());
+				servo.to(80);
     });
+
+    socket.on('open', (data) => {
+				servo.to(5);
+    });
+
+    socket.on('close', (data) => {
+				servo.to(80);
+    });
+
 });
 
 console.log('Waiting for connection');
